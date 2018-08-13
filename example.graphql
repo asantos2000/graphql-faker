@@ -1,0 +1,50 @@
+# This is sample IDL schema for GraphQL Faker.
+#
+# There are two directives you can use to enhance fake data:
+#   - @fake
+#   - @examples
+# Each directive has autocompletion working so start by typing @
+#
+# Press save or Cmd+Enter to apply the changes and update server. Switch to GraphiQL
+# on the left panel to immediately test your changes.
+# This tool also supports extending existing APIs. Check graphql-faker --help
+#
+# Developed with ❤️ by APIs.guru | https://github.com/APIs-guru/graphql-faker
+
+type Company {
+  name: String @fake(type:companyName, locale:pt_BR),
+  industry: String @examples(values: ["IT", "Manufatura", "Medicina", "Media"]),
+  employees: [Employee!]
+}
+
+type Employee {
+  firstName: String @fake(type: firstName, locale:pt_BR),
+  lastName: String @fake(type: lastName, locale:pt_BR),
+  name: String @fake(type: firstName, locale:pt_BR) @deprecated(reason : "Split name in two"),
+  address: Address
+  email:String @fake(type:email, locale: pt_BR),
+  subordinates: [Employee!],
+  company: Company
+}
+
+type Address {
+    zipCode: String @fake(type:zipCode, locale:pt_BR),
+    city: String @fake(type:city, locale:pt_BR),
+    streetName: String @fake(type:streetName, locale:pt_BR),
+    streetAddress: String @fake(type:streetAddress, locale:pt_BR),
+    secondaryAddress: String @fake(type:secondaryAddress, locale:pt_BR),
+    county: String @fake(type:county, locale:pt_BR),
+    country: String @fake(type:country, locale:pt_BR),
+    countryCode: String @fake(type:countryCode, locale:pt_BR),
+    state: String @fake(type:state, locale:pt_BR),
+    stateAbbr: String @fake(type:stateAbbr, locale:pt_BR),
+    latitude: String @fake(type:latitude, locale:pt_BR),
+    longitude: String @fake(type:longitude, locale:pt_BR)
+}
+
+type Query {
+  employee(id: ID): Employee,
+  company(id: ID): Company,
+  allCompanies: [Company!],
+  allEmployees: [Employee]
+}

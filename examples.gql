@@ -1,0 +1,54 @@
+query Employee {
+  employee (id: 1) {
+    firstName
+    lastName
+    address {
+      state
+      latitude
+      longitude
+      streetName
+      streetAddress
+      secondaryAddress
+      stateAbbr
+      state
+      city
+      county
+      country
+      countryCode
+      zipCode
+    }
+    company {
+      name
+      industry
+    }
+  }
+}
+
+query Company {
+  company (id: 1) {
+    name
+    industry
+    employees {
+      lastName
+      firstName
+    }
+  }
+}
+
+query AllCompanies {
+  allCompanies {
+    name
+    industry
+  }
+}
+
+query AllEmployess {
+  allEmployees {
+    firstName
+    lastName
+    email
+    address {
+      country
+    }
+  }
+}
